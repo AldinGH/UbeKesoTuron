@@ -463,10 +463,19 @@ def public_user(u):
             "phone": u["phone"], "must_change": bool(u["must_change"])}
 
 
+def find_media(name):
+    """Look in media/ first, then next to server.py, so the video works either way it was uploaded."""
+    for folder in (MEDIA_DIR, HERE):
+        path = os.path.join(folder, name)
+        if os.path.isfile(path):
+            return path
+    return None
+
+
 def promo():
     for name in PROMO_NAMES:
-        path = os.path.join(MEDIA_DIR, name)
-        if os.path.isfile(path) and os.path.getsize(path) > 0:
+        path = find_media(name)
+        if path and os.path.getsize(path) > 0:
             return {"src": "/media/{}?v={}".format(name, int(os.path.getmtime(path))), "type": MEDIA_TYPES[os.path.splitext(name)[1]]}
     return None
 
@@ -976,10 +985,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Cache-Control", "no-store")
         super().end_headers()
 
-    def _serve_media(self, name):
+    def _serve_media(self, name, head=False):
         ext = os.path.splitext(name)[1].lower()
-        full = os.path.join(MEDIA_DIR, name)
-        if not (MEDIA_NAME_RE.match(name) and ext in MEDIA_TYPES and os.path.isfile(full)):
+        if not (MEDIA_NAME_RE.match(name) and ext in MEDIA_TYPES):
+            return self.send_error(404)
+        full = find_media(name)
+        if full is None:
             return self.send_error(404)
         size = os.path.getsize(full)
         start, end, status = 0, size - 1, 200
@@ -1008,6 +1019,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-Range", "bytes {}-{}/{}".format(start, end, size))
         self.send_header("Content-Length", str(max(0, end - start + 1)))
         self.end_headers()
+        if head:
+            return
         try:
             with open(full, "rb") as f:
                 f.seek(start)
@@ -1066,6 +1079,22 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self._json(500, {"error": "Something went wrong on the server."})
         self._json(status, data)
 
+    def _static_or_redirect(self, head=False):
+        path = urllib.parse.urlparse(self.path).path
+        if path == "/favicon.ico":
+            return self._redirect("/media/logo-icon.png")
+        if path in STATIC:
+            self.path = "/" + STATIC[path]
+            return (super().do_HEAD if head else super().do_GET)()
+        # Any other address (old links, typos, /home, /index) goes straight to the landing page.
+        return self._redirect("/")
+
+    def _redirect(self, where):
+        self.send_response(302)
+        self.send_header("Location", where)
+        self.send_header("Content-Length", "0")
+        self.end_headers()
+
     def do_GET(self):
         self._media = False
         path = urllib.parse.urlparse(self.path).path
@@ -1073,10 +1102,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self._api("GET")
         if path.startswith("/media/"):
             return self._serve_media(urllib.parse.unquote(path[len("/media/"):]))
-        if path in STATIC:
-            self.path = "/" + STATIC[path]
-            return super().do_GET()
-        self.send_error(404)
+        return self._static_or_redirect()
 
     def do_POST(self):
         if urllib.parse.urlparse(self.path).path.startswith("/api/"):
@@ -1084,7 +1110,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_error(404)
 
     def do_HEAD(self):
-        self.send_error(405)
+        self._media = False
+        path = urllib.parse.urlparse(self.path).path
+        if path.startswith("/api/"):
+            return self.send_error(405)
+        if path.startswith("/media/"):
+            return self._serve_media(urllib.parse.unquote(path[len("/media/"):]), head=True)
+        return self._static_or_redirect(head=True)
 
 
 class Server(socketserver.ThreadingMixIn, http.server.HTTPServer):

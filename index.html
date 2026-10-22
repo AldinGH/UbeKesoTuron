@@ -3,11 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>UbeKeso Cart</title>
+  <title>UbeKeso Cart | Ube-Kesoturon, crispy ube &amp; cheese turon in Cebu City</title>
+  <meta name="description" content="Order ahead from UbeKeso Cart: crispy ube &amp; cheese turon, ready for pickup in Cebu City.">
   <meta name="theme-color" content="#5B2D8E">
   <link rel="icon" type="image/png" href="media/logo-icon.png">
   <link rel="apple-touch-icon" href="media/logo-icon.png">
 
+  <link rel="preload" as="image" href="media/logo-small.jpg">
+  <link rel="preconnect" href="https://pyscript.net">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,12 +22,23 @@
   <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 </head>
 <body>
-  <main id="phone" class="no-tabs">
+  <main id="site" class="no-tabs">
     <div id="screen">
-      <div class="loading">
-        <img class="brand-logo" src="media/logo.jpg" alt="Ube-Kesoturon" width="150" height="150">
-        <p>Starting UbeKeso Cart…</p>
-        <small>Loading... This takes a few seconds.</small>
+      
+      <div class="head"><div class="row top-row">
+        <div class="brand-row">
+          <img class="brand-mini" src="media/logo-small.jpg" alt="" width="48" height="48">
+          <div><div class="eyebrow">Cebu City &middot; Pickup</div><h1>UbeKeso Cart</h1></div>
+        </div>
+        <span class="settings-btn" aria-hidden="true">Settings</span>
+      </div></div>
+      <div class="body">
+        <div class="card promo"><div class="promo-title">Watch: Ube-Kesoturon</div>
+          <video class="promo-video" data-auto="1" autoplay muted loop playsinline controls preload="auto" poster="media/logo.jpg" src="/media/promo.mp4"></video>
+        </div>
+        <div class="section-title" style="margin-top:0">Order ahead</div>
+        <div class="card product"><div class="top"><div class="photo">🍠</div>
+          <div><div class="name">Ube cheese turon</div><div class="muted">Getting the order form ready&hellip;</div></div></div></div>
       </div>
     </div>
     <nav id="tabbar" aria-label="Main tabs"></nav>

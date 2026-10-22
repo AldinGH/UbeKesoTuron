@@ -1201,6 +1201,12 @@ RENDERERS = {
 }
 
 
+def same_video(a, b):
+    def name(v):
+        return str(v or "").split("?")[0].rstrip("/").split("/")[-1]
+    return name(a) != "" and name(a) == name(b)
+
+
 def render():
     screen = state["screen"]
     holder = el("screen")
@@ -1218,7 +1224,7 @@ def render():
     restored = False
     if kept is not None:
         slot = holder.querySelector("video.promo-video")
-        if slot is not None and str(slot.getAttribute("src")) == str(kept.getAttribute("src")):
+        if slot is not None and same_video(slot.getAttribute("src"), kept.getAttribute("src")):
             slot.replaceWith(kept)
             restored = True
             if was_playing:
@@ -1240,12 +1246,12 @@ def render():
         body.scrollTop = keep
     state["_last"] = screen
 
-    phone = el("phone")
+    site = el("site")
     if role() is None:
-        phone.classList.add("no-tabs")
+        site.classList.add("no-tabs")
         el("tabbar").innerHTML = ""
     else:
-        phone.classList.remove("no-tabs")
+        site.classList.remove("no-tabs")
         el("tabbar").innerHTML = render_tabbar()
 
 
@@ -2039,9 +2045,9 @@ async def load_public():
 async def restore():
     status, data = await api("GET", "/api/state")
     while status == 0:
-        note = document.querySelector(".loading small")
-        if note is not None:
-            note.textContent = "Waiting for the server... Your data is safe. Trying again."
+        if state["conn_ok"]:
+            state["conn_ok"] = False
+            toast("Waiting for the server... Your data is safe. Trying again.")
         await asyncio.sleep(3)
         status, data = await api("GET", "/api/state")
     if status == 200 and data.get("me"):
@@ -2109,6 +2115,8 @@ def on_tick():
 
 
 async def start():
+    if el("screen").querySelector("video.promo-video") is not None:
+        state["_last"] = "landing"
     state["tracked"] = load_tracked()
     await load_public()
     saved = load_token()
@@ -2120,11 +2128,11 @@ async def start():
         await poll()
 
 
-phone = el("phone")
-phone.addEventListener("click", create_proxy(on_click))
-phone.addEventListener("submit", create_proxy(on_submit))
-phone.addEventListener("input", create_proxy(on_input))
-phone.addEventListener("change", create_proxy(on_change))
+site = el("site")
+site.addEventListener("click", create_proxy(on_click))
+site.addEventListener("submit", create_proxy(on_submit))
+site.addEventListener("input", create_proxy(on_input))
+site.addEventListener("change", create_proxy(on_change))
 document.addEventListener("keydown", create_proxy(on_keydown))
 document.addEventListener("visibilitychange", create_proxy(on_visible))
 window.setInterval(create_proxy(on_tick), POLL_MS)

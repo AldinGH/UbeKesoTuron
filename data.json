@@ -28,15 +28,49 @@
    "extra": false,
    "pickup": "01:01",
    "pay": "cash",
-   "status": "new",
+   "status": "cancelled",
    "total": 25,
    "created": 1792686743.1691382,
-   "updated": 1792686743.1691391,
+   "updated": 1792690410.6504216,
    "handled_by": null,
    "track": "9afe221749bd83fa"
+  },
+  {
+   "id": 2,
+   "source": "online",
+   "name": "Deca Mae Dayuday",
+   "phone": "09124734949",
+   "address": "Tisa Cebu",
+   "pieces": 1,
+   "extra": false,
+   "pickup": "02:03",
+   "pay": "ewallet",
+   "status": "cancelled",
+   "total": 25,
+   "created": 1792690494.8119922,
+   "updated": 1792690503.3338485,
+   "handled_by": null,
+   "track": "e04fe93126549670"
+  },
+  {
+   "id": 3,
+   "source": "online",
+   "name": "Deca Mae Dayuday",
+   "phone": "09124734949",
+   "address": "Tisa Cebu",
+   "pieces": 1,
+   "extra": false,
+   "pickup": "02:04",
+   "pay": "cash",
+   "status": "cancelled",
+   "total": 25,
+   "created": 1792690498.880547,
+   "updated": 1792690504.670112,
+   "handled_by": null,
+   "track": "c95401a9b1426f2a"
   }
  ],
- "next_order_id": 2,
+ "next_order_id": 4,
  "cards": [],
  "stock": [
   {
@@ -68,6 +102,46 @@
    "actor": "Deca Mae Dayuday",
    "role": "customer",
    "text": "placed order #1 (1 pcs, pickup 01:01)"
+  },
+  {
+   "id": "6d1063d4",
+   "ts": 1792690410.6553745,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "cancelled order #1"
+  },
+  {
+   "id": "760af93d",
+   "ts": 1792690494.812211,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "placed order #2 (1 pcs, pickup 02:03)"
+  },
+  {
+   "id": "9a2b4b82",
+   "ts": 1792690498.880616,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "placed order #3 (1 pcs, pickup 02:04)"
+  },
+  {
+   "id": "93b15592",
+   "ts": 1792690503.3338647,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "cancelled order #2"
+  },
+  {
+   "id": "16407d7b",
+   "ts": 1792690504.6701283,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "cancelled order #3"
   }
  ]
 }

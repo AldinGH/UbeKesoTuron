@@ -1,24 +1,42 @@
 {
  "users": {
-  "ubc8641a6": {
-   "id": "ubc8641a6",
+  "ue8328651": {
+   "id": "ue8328651",
    "name": "Owner",
    "role": "admin",
    "email": "admin@ubekeso.ph",
    "phone": null,
-   "salt": "14464515e1e6945e772ffc562fe91648",
-   "hash": "17e33a7488f676e99fb130321fd62d0f190d145424d1db8471f65cf6ec3fc524",
+   "salt": "2be0c07500a46d6c5cfc84b2cc5f3ca9",
+   "hash": "72030196430a40ec9b5f357a6801ee4b57635ce6d8ece10f9302fd321c70899b",
    "active": true,
    "must_change": true,
-   "created": 1792286762.5355866,
+   "created": 1792686309.6209764,
    "created_by": null,
-   "last_login": 1792287734.9499638,
+   "last_login": null,
    "card_id": null
   }
  },
  "sessions": {},
- "orders": [],
- "next_order_id": 1,
+ "orders": [
+  {
+   "id": 1,
+   "source": "online",
+   "name": "Deca Mae Dayuday",
+   "phone": "09124734949",
+   "address": "Tisa Cebu",
+   "pieces": 1,
+   "extra": false,
+   "pickup": "01:01",
+   "pay": "cash",
+   "status": "new",
+   "total": 25,
+   "created": 1792686743.1691382,
+   "updated": 1792686743.1691391,
+   "handled_by": null,
+   "track": "9afe221749bd83fa"
+  }
+ ],
+ "next_order_id": 2,
  "cards": [],
  "stock": [
   {
@@ -38,26 +56,18 @@
    "left": 0
   }
  ],
- "day": "2026-10-18",
+ "day": "2026-10-23",
  "sold_today": 0,
  "extra_rev": 0,
  "history": {},
  "activity": [
   {
-   "id": "0df11f4d",
-   "ts": 1792287734.9542496,
-   "actor_id": "ubc8641a6",
-   "actor": "Owner",
-   "role": "admin",
-   "text": "signed in"
-  },
-  {
-   "id": "a25c8421",
-   "ts": 1792288641.6195474,
-   "actor_id": "ubc8641a6",
-   "actor": "Owner",
-   "role": "admin",
-   "text": "signed out"
+   "id": "0dcb6d02",
+   "ts": 1792686743.1732378,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "placed order #1 (1 pcs, pickup 01:01)"
   }
  ]
 }

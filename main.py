@@ -687,7 +687,7 @@ def render_landing():
       </div>
       <button class="settings-btn" data-action="open-settings" aria-label="Settings">{gear}Settings</button>
     </div></div>
-    <div class="body">
+    <div class="body landing">
       {promo}
       {orders}
       <div class="section-title" style="margin-top:0">Order ahead</div>
@@ -2128,7 +2128,7 @@ async def start():
         await poll()
 
 
-site = el("site")
+site = el("site") or el("phone")
 site.addEventListener("click", create_proxy(on_click))
 site.addEventListener("submit", create_proxy(on_submit))
 site.addEventListener("input", create_proxy(on_input))

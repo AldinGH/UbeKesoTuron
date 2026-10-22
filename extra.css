@@ -82,7 +82,6 @@
   display: block; align-self: center; width: 132px; height: 132px; border-radius: 30px; object-fit: cover;
   background: #A589CC; margin-bottom: 14px; box-shadow: 0 10px 26px rgba(58, 27, 94, .25);
 }
-.loading .brand-logo { width: 150px; height: 150px; margin-bottom: 4px; }
 .signin { padding-top: 28px; }
 .signin h1, .signin .sub { text-align: center; }
 .center-link { display: block; margin: 6px auto 0; text-align: center; }
@@ -128,16 +127,16 @@
 @media (min-width: 900px) {
   body { padding: 24px; }
 
-  #phone {
+  #site {
     width: min(1100px, calc(100vw - 48px));
     height: min(920px, calc(100dvh - 48px));
     border-radius: 28px;
   }
 
-  #phone.no-tabs { width: min(520px, calc(100vw - 48px)); }
+  #site.no-tabs { width: min(520px, calc(100vw - 48px)); }
 
   #screen { inset: 0 0 0 232px; }
-  #phone.no-tabs #screen { inset: 0; }
+  #site.no-tabs #screen { inset: 0; }
   #tabbar {
     top: 0; right: auto; bottom: 0; left: 0; width: 232px; height: auto;
     flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 4px;
@@ -168,7 +167,7 @@
   .sheet { width: min(480px, calc(100% - 48px)); max-height: 86%; border-radius: 22px; padding: 22px 22px 26px; }
 
   #toast { left: 256px; right: 24px; bottom: 24px; max-width: 460px; margin: 0 auto; }
-  #phone.no-tabs #toast { left: 24px; }
+  #site.no-tabs #toast { left: 24px; }
 
   .promo-video { max-height: 460px; }
   .about-hero .brand-logo { width: 190px; height: 190px; }
@@ -182,19 +181,19 @@
 }
 
 @media (min-width: 1400px) {
-  #phone { width: min(1240px, calc(100vw - 48px)); }
-  #phone.no-tabs { width: min(560px, calc(100vw - 48px)); }
+  #site { width: min(1240px, calc(100vw - 48px)); }
+  #site.no-tabs { width: min(560px, calc(100vw - 48px)); }
   .head { padding-left: max(28px, calc((100% - 900px) / 2)); padding-right: max(28px, calc((100% - 900px) / 2)); }
   .body, .pinned { padding-left: max(28px, calc((100% - 900px) / 2)); padding-right: max(28px, calc((100% - 900px) / 2)); }
 }
 
 html, body { width: 100%; }
 body { display: block; padding: 0; background: var(--bg); }
-#phone, #phone.no-tabs {
+#site, #site.no-tabs {
   width: 100%; max-width: none; height: 100vh; height: 100dvh;
   border: 0; border-radius: 0; box-shadow: none;
 }
-#phone.no-tabs { background: linear-gradient(160deg, #EFE6FA 0%, #FBF9FF 55%); }
+#site.no-tabs { background: linear-gradient(160deg, #EFE6FA 0%, #FBF9FF 55%); }
 
 @media (min-width: 481px) {
   .head { padding-left: max(20px, calc((100% - 760px) / 2)); padding-right: max(20px, calc((100% - 760px) / 2)); }
@@ -209,11 +208,15 @@ body { display: block; padding: 0; background: var(--bg); }
   .body, .pinned { padding-left: max(32px, calc((100% - 1040px) / 2)); padding-right: max(32px, calc((100% - 1040px) / 2)); }
   #tabbar { width: 248px; }
   #screen { inset: 0 0 0 248px; }
-  #phone.no-tabs #screen { inset: 0; }
+  #site.no-tabs #screen { inset: 0; }
   #toast { left: 272px; }
-  #phone.no-tabs #toast { left: 24px; }
+  #site.no-tabs #toast { left: 24px; }
 }
 @media (min-width: 1400px) {
   .head { padding-left: max(32px, calc((100% - 1200px) / 2)); padding-right: max(32px, calc((100% - 1200px) / 2)); }
   .body, .pinned { padding-left: max(32px, calc((100% - 1200px) / 2)); padding-right: max(32px, calc((100% - 1200px) / 2)); }
 }
+
+/* Pre-built landing: reserve the video's space so nothing jumps when the app takes over */
+.promo-video { aspect-ratio: 16 / 9; }
+html { scroll-behavior: smooth; }

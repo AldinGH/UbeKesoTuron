@@ -75,7 +75,7 @@ state = {
 
     "sold_today": 0, "extra_rev": 0, "week_hist": [None] * 6,
     "cards": [], "orders": [], "stock": [], "staff": [], "activity": [], "customers": 0,
-    "promo": None,
+    "promo": {"src": "media/promo.mp4", "type": "video/mp4"},  # same video the pre-built page already shows
     "tracked": [], "my_orders": [],
 
     "sale": new_sale(),
@@ -2045,6 +2045,7 @@ async def load_public():
 async def restore():
     status, data = await api("GET", "/api/state")
     while status == 0:
+        reveal()
         if state["conn_ok"]:
             state["conn_ok"] = False
             toast("Waiting for the server... Your data is safe. Trying again.")
@@ -2053,11 +2054,21 @@ async def restore():
     if status == 200 and data.get("me"):
         apply_state(data)
         begin_session()
+        reveal()
     else:
         store_token(None)
         state["token"] = None
         state["screen"] = "landing"
         render()
+        reveal()
+
+
+def reveal():
+    """Un-hide the screen (index.html hides it for signed-in staff until their own page is ready)."""
+    try:
+        document.documentElement.classList.remove("has-session")
+    except Exception:
+        pass
 
 
 def run(result):
@@ -2114,17 +2125,29 @@ def on_tick():
     asyncio.ensure_future(poll())
 
 
+async def refresh_public():
+    """Fetch public settings in the background. Never blocks the first paint."""
+    before = state.get("promo")
+    await load_public()
+    if (state["screen"] == "landing" and not state["token"] and state["promo"] != before
+            and can_redraw()):
+        render()
+
+
 async def start():
     if el("screen").querySelector("video.promo-video") is not None:
         state["_last"] = "landing"
     state["tracked"] = load_tracked()
-    await load_public()
     saved = load_token()
     if saved:
+        # Signed-in staff: the pre-built customer page is hidden by index.html, go straight to their screen.
         state["token"] = saved
+        await load_public()
         await restore()
     else:
+        # Visitors: show the landing page right away, then fetch everything else behind the scenes.
         render()
+        asyncio.ensure_future(refresh_public())
         await poll()
 
 

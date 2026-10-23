@@ -292,6 +292,18 @@ def load():
             value = "admin@ubekeso.ph"
         new_user("Owner", "admin", "email", value, ADMIN_PASSWORD, must_change=ADMIN_PASSWORD_IS_DEFAULT)
         created = True
+    # If the owner password is set as an environment variable (for example on
+    # Render), keep the existing admin account in step with it on every start.
+    if not ADMIN_PASSWORD_IS_DEFAULT:
+        admin = next(u for u in DB["users"].values() if u["role"] == "admin")
+        kind, value = parse_identifier(ADMIN_EMAIL)
+        if kind == "email" and admin.get("email") != value:
+            other = find_user("email", value)
+            if other is None or other is admin:
+                admin["email"] = value
+        if not check_pw(admin, ADMIN_PASSWORD):
+            admin["salt"], admin["hash"] = hash_pw(ADMIN_PASSWORD)
+            admin["must_change"] = False
     save()
     return created
 

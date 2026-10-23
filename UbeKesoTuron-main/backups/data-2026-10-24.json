@@ -1,0 +1,162 @@
+{
+ "users": {
+  "ue8328651": {
+   "id": "ue8328651",
+   "name": "Owner",
+   "role": "admin",
+   "email": "admin@ubekeso.ph",
+   "phone": null,
+   "salt": "2be0c07500a46d6c5cfc84b2cc5f3ca9",
+   "hash": "72030196430a40ec9b5f357a6801ee4b57635ce6d8ece10f9302fd321c70899b",
+   "active": true,
+   "must_change": true,
+   "created": 1792686309.6209764,
+   "created_by": null,
+   "last_login": 1792770518.7327473,
+   "card_id": null
+  }
+ },
+ "sessions": {
+  "KqPvkIo6xVQrAfsmvYqom5orjZi638nFKMOIzWOJtoA": {
+   "uid": "ue8328651",
+   "exp": 1795362518.7328513
+  }
+ },
+ "orders": [
+  {
+   "id": 1,
+   "source": "online",
+   "name": "Deca Mae Dayuday",
+   "phone": "09124734949",
+   "address": "Tisa Cebu",
+   "pieces": 1,
+   "extra": false,
+   "pickup": "01:01",
+   "pay": "cash",
+   "status": "cancelled",
+   "total": 25,
+   "created": 1792686743.1691382,
+   "updated": 1792690410.6504216,
+   "handled_by": null,
+   "track": "9afe221749bd83fa"
+  },
+  {
+   "id": 2,
+   "source": "online",
+   "name": "Deca Mae Dayuday",
+   "phone": "09124734949",
+   "address": "Tisa Cebu",
+   "pieces": 1,
+   "extra": false,
+   "pickup": "02:03",
+   "pay": "ewallet",
+   "status": "cancelled",
+   "total": 25,
+   "created": 1792690494.8119922,
+   "updated": 1792690503.3338485,
+   "handled_by": null,
+   "track": "e04fe93126549670"
+  },
+  {
+   "id": 3,
+   "source": "online",
+   "name": "Deca Mae Dayuday",
+   "phone": "09124734949",
+   "address": "Tisa Cebu",
+   "pieces": 1,
+   "extra": false,
+   "pickup": "02:04",
+   "pay": "cash",
+   "status": "cancelled",
+   "total": 25,
+   "created": 1792690498.880547,
+   "updated": 1792690504.670112,
+   "handled_by": null,
+   "track": "c95401a9b1426f2a"
+  }
+ ],
+ "next_order_id": 4,
+ "cards": [],
+ "stock": [
+  {
+   "name": "Cheese",
+   "left": 0
+  },
+  {
+   "name": "Lumpia wrappers",
+   "left": 0
+  },
+  {
+   "name": "Malagkit rice",
+   "left": 0
+  },
+  {
+   "name": "Ube condensed milk",
+   "left": 0
+  }
+ ],
+ "day": "2026-10-24",
+ "sold_today": 0,
+ "extra_rev": 0,
+ "history": {
+  "2026-10-23": 0
+ },
+ "activity": [
+  {
+   "id": "0dcb6d02",
+   "ts": 1792686743.1732378,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "placed order #1 (1 pcs, pickup 01:01)"
+  },
+  {
+   "id": "6d1063d4",
+   "ts": 1792690410.6553745,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "cancelled order #1"
+  },
+  {
+   "id": "760af93d",
+   "ts": 1792690494.812211,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "placed order #2 (1 pcs, pickup 02:03)"
+  },
+  {
+   "id": "9a2b4b82",
+   "ts": 1792690498.880616,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "placed order #3 (1 pcs, pickup 02:04)"
+  },
+  {
+   "id": "93b15592",
+   "ts": 1792690503.3338647,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "cancelled order #2"
+  },
+  {
+   "id": "16407d7b",
+   "ts": 1792690504.6701283,
+   "actor_id": null,
+   "actor": "Deca Mae Dayuday",
+   "role": "customer",
+   "text": "cancelled order #3"
+  },
+  {
+   "id": "6f37ce31",
+   "ts": 1792770518.732861,
+   "actor_id": "ue8328651",
+   "actor": "Owner",
+   "role": "admin",
+   "text": "signed in"
+  }
+ ]
+}

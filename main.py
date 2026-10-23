@@ -692,8 +692,7 @@ def render_landing():
       {orders}
       <div class="section-title" style="margin-top:0">Order ahead</div>
       <div class="card product">
-        <div class="top"><div class="photo">\U0001F360</div>
-          <div><div class="name">Ube cheese turon</div><div class="muted">{price} per piece</div></div></div>
+<div class="top"><div class="photo"><img src="media/turon.png" alt="Ube Cheese Turon" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>          <div><div class="name">Ube Cheese Turon</div><div class="muted">{price} per piece</div></div></div>
         <div class="stepper-row"><span class="muted">Quantity</span>
           <div class="stepper">
             <button data-action="cqty" data-arg="-1" aria-label="Less" {minus_dis}>&minus;</button>
@@ -870,8 +869,8 @@ def render_sell():
     <div class="head"><div class="eyebrow">Sell</div><h1>New sale</h1></div>
     <div class="body">
       <div class="card product">
-        <div class="top"><div class="photo">\U0001F360</div>
-          <div><div class="name">Ube cheese turon</div><div class="muted">{price} per piece</div></div></div>
+        <div class="top"><div class="photo"><img src="media/turon.png" alt="Ube Cheese Turon" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+          <div><div class="name">Ube Cheese Turon</div><div class="muted">{price} per piece</div></div></div>
         <div class="stepper-row"><span class="muted">Quantity</span>
           <div class="stepper">
             <button data-action="qty" data-arg="-1" aria-label="Less" {minus_dis}>&minus;</button>
@@ -908,7 +907,7 @@ def render_complete():
     r = state["receipt"]
     if r is None:
         return render_home()
-    lines = '<div class="line"><span>Ube cheese turon \u00d7 {q}</span><span>{a}</span></div>'.format(
+    lines = '<div class="line"><span>Ube Cheese Turon \u00d7 {q}</span><span>{a}</span></div>'.format(
         q=r["qty"], a=peso(r["qty"] * PRICE))
     if r["extra"]:
         lines += '<div class="line"><span>Extra cheese \u00d7 {q}</span><span>{a}</span></div>'.format(
@@ -1386,8 +1385,14 @@ def act_change_pass(_arg=None):
 
 
 def act_cqty(arg):
+    if state.get("cust") is None:
+        state["cust"] = new_cust()
     c = state["cust"]
-    c["qty"] = max(1, min(60, c["qty"] + int(arg)))
+    if c is not None and isinstance(c, dict):
+        try:
+            c["qty"] = max(1, min(60, int(c.get("qty", 1)) + int(arg)))
+        except (TypeError, ValueError):
+            c["qty"] = 1
     render()
 
 
